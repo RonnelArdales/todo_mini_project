@@ -1,0 +1,40 @@
+{% extends 'dashboard/base.html' %}
+{% block content %}
+
+<div class="container">
+        <div class="header-bar">
+            <h2 class="title-style">My To-Do List</h2> 
+        </div>
+    <div style="margin: 10px; margin-left: 76%;"> 
+        <a id="add-link" href="{% url 'addtask'%}">&#43; Add task</a>
+    </div>
+    
+    
+    <div id="tasklist" class="task-item-wrapper">
+        {% for task in tasks %} 
+        <div class="task-wrapper" data-position="{{task.id}}" >
+            {% if task.complete %}
+            <div class="task-title">
+
+                 <div class="task-complete-icon" ></div>
+                 <i><s><a href="{% url 'taskupdate' task.id %}" >{{task.title}}</a></s></i>
+             </div>
+             {% else %}
+             <div class="task-title">
+                 <div class="task-incomplete-icon"></div>
+                 <a href="{% url 'taskupdate' task.id %}" >{{task.title}}</a>
+             </div>
+             {% endif%}
+             <a class="delete-link"  href="{% url 'taskdelete' task.id %}">&#215;</a>
+        </div>
+    
+        {% empty %}
+        <h3>No item in list</h3>
+        {% endfor %}
+
+  
+
+</div>
+{% endblock content %}
+
+

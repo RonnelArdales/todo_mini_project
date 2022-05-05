@@ -1,0 +1,22 @@
+{% extends 'dashboard/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container" >
+    <div class="header-back">
+        <a class="back-button" href="{% url 'home' %}">&#8592; Back</a>
+    </div>
+    <div style="padding: 25px;">
+        <form method="POST">
+            {% csrf_token %}
+                {{form|crispy}}
+            <div>
+                <input class="button-a" type="submit" value="Add">
+            </div>
+        </form>
+    </div>
+       
+
+</div>
+
+{% endblock content %}

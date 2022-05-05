@@ -1,0 +1,30 @@
+{% extends 'dashboard/base.html' %}
+{% load crispy_forms_tags %}
+{% block content %}
+
+<div class="container">
+    <div style="padding: 20px;">
+    <div style="justify-content: space-between;">
+    <div style="align-content: center;flex-direction: column; ">
+        <img style="border-radius: 50%; height: 120px; width: 120px; align-items: center; justify-content: center;   display: block;
+        margin-left: auto;
+        margin-right: auto;
+        "  src="{{user.profile.image.url}}"  > 
+    </div>
+        <div style="align-content: center;flex-direction:row; text-align: center;">
+       <h2 style="font-weight: bold;">{{user.username}}</h2>
+        <p style="margin-top: -10px;">{{user.email}}</p>
+        </div>
+    </div>
+
+    <form method="POST" enctype="multipart/form-data" style="border: 1px;" >
+        {% csrf_token %}
+            {{u_form|crispy}}
+            {{p_form|crispy}}
+        <div>
+            <button class="button-a" type="submit">Update </button>
+        </div>
+    </form>
+</div>
+
+{% endblock content %}
