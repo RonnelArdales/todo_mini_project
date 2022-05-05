@@ -9,11 +9,8 @@ from django.contrib import messages
 @login_required
 def home(request):
     tasks = Task.objects.filter(user=request.user)
-    context = {
-        'tasks' : tasks
-    }
 
-    return render(request, 'dashboard/home.html', context)
+    return render(request, 'dashboard/home.html', {'tasks' : tasks})
 
 @login_required
 def addtask(request):
@@ -27,20 +24,13 @@ def addtask(request):
     else:
         form = TaskListForm()
 
-
-        context = {
-            'form':form
-        }
-
-    return render(request, 'dashboard/addtask.html', context)
+    return render(request, 'dashboard/addtask.html', {'form':form})
 
 @login_required
 def taskview(request, pk):
     task = get_object_or_404(Task, pk=pk)
-    context = {
-        "task":task
-    }
-    return render (request, 'dashboard/taskview.html', context)
+
+    return render (request, 'dashboard/taskview.html', {"task":task})
 
 @login_required
 def taskupdate(request, pk):
@@ -53,11 +43,7 @@ def taskupdate(request, pk):
     else:
         form = TaskUpdateForm(instance=task)
 
-    context = {
-        "form" : form
-    }
-
-    return render(request, 'dashboard/taskupdate.html', context)
+    return render(request, 'dashboard/taskupdate.html', {"form": form})
 
 @login_required
 def taskdelete(request, pk):
